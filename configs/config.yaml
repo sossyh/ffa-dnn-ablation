@@ -1,0 +1,15 @@
+data:
+  roi_dir: "data/raw/participants_data"
+  video_dir: "data/raw/videos"
+
+model:
+  layer_names: ["conv1", "conv2", "conv3", "conv4", "conv5", "fc6", "fc7", "fc8"]
+  regions: ["V1", "V2", "V3", "V4", "LOC", "EBA", "FFA", "STS", "PPA"]
+
+ablation:
+  num_units_to_ablate: 50
+  random_seed: 42
+  num_random_controls: 100
+
+paths:
+  results_dir: "results"
