@@ -1,10 +1,21 @@
+models:
+  - name: alexnet
+    source: torchvision
+    layers: ["conv1", "conv2", "conv3", "conv4", "conv5", "fc6", "fc7", "fc8"]
+
+  - name: resnet_vggface2
+    source: facenet-pytorch
+    layers: ["layer1", "layer2", "layer3", "layer4"]
+
+  - name: vit
+    source: huggingface
+    layers: ["block1", "block6", "block12"]
+
 data:
   roi_dir: "data/raw/participants_data"
   video_dir: "data/raw/videos"
 
-model:
-  layer_names: ["conv1", "conv2", "conv3", "conv4", "conv5", "fc6", "fc7", "fc8"]
-  regions: ["V1", "V2", "V3", "V4", "LOC", "EBA", "FFA", "STS", "PPA"]
+regions: ["V1", "V2", "V3", "V4", "LOC", "EBA", "FFA", "STS", "PPA"]
 
 ablation:
   num_units_to_ablate: 50
