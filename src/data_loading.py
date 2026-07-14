@@ -123,3 +123,54 @@ def load_all_rois(fmri_dir, subject, rois=None):
 
     sub_dir = os.path.join(fmri_dir, subject)
     return {roi: get_fmri(sub_dir, roi) for roi in rois}
+
+def get_video_list(video_dir):
+    """
+    Returns a sorted list of paths to all video files in the given directory.
+
+    Parameters
+    ----------
+    video_dir : str
+        Path to the folder containing the Algonauts video clips.
+
+    Returns
+    -------
+    list of str
+        Sorted list of full paths to .mp4 video files.
+    """
+    video_files = [
+        os.path.join(video_dir, f)
+        for f in os.listdir(video_dir)
+        if f.endswith(".mp4")
+    ]
+    video_files.sort()
+    return video_files
+
+
+def load_video_frames(video_path, num_frames=8):
+    """
+    Loads a fixed number of evenly spaced frames from a video file.
+
+    Parameters
+    ----------
+    video_path : str
+        Path to the video file.
+    num_frames : int
+        Number of frames to sample evenly across the video.
+
+    Returns
+    -------
+    np.ndarray
+        Array of shape (num_frames, height, width, 3), dtype uint8.
+    """
+    from decord import VideoReader
+    from decord import cpu
+
+    vr = VideoReader(video_path, ctx=cpu(0))
+    total_frames = len(vr)
+
+    # evenly spaced frame indices across the whole clip
+    indices = np.linspace(0, total_frames - 1, num_frames).astype(int)
+    frames = vr.get_batch(indices).asnumpy()
+
+    return frames
