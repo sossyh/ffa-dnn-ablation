@@ -9,7 +9,7 @@ from sklearn.model_selection import KFold
 from scipy.stats import pearsonr
 
 
-def train_and_evaluate_encoding_model(X, Y, alpha=100.0, n_folds=5, seed=42):
+def train_and_evaluate_encoding_model(X, Y, alpha=10.0, n_folds=5, seed=42):
     """
     Trains a ridge regression encoding model with cross-validation and
     returns per-voxel prediction accuracy.
