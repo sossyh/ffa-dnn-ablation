@@ -25,8 +25,6 @@ committed to this repo.
 
 ## Repository Structure
 
-## Repository Structure
-
 ```
 ffa-dnn-ablation/
 ├── data/                # raw + processed data (gitignored, see data/README.md)
